@@ -14,7 +14,9 @@ To demonstrate the code and ensure it runs on your machine, we provide data for 
 `regfm` depents on:
 
 `R (version >= 3.1.0), including several non-base packages`
+
 ` [bedtools](https://github.com/arq5x/bedtools2) (version >= 2-2.19.1)`
+
 `[plink](https://www.cog-genomics.org/plink2) (version >= 1.9)`
 
 Please note that plink v1.07 is likely to run out of memory with the 1000 Genomes reference sets, so we strongly suggest you use v1.9. 
