@@ -1,5 +1,4 @@
-# regfm (Regulatory Fine Mapping) `v1.0.0`
-Software for regulatory fine-mapping, described in http://biorxiv.org/content/early/2016/05/19/054361
+#regfm (Regulatory Fine Mapping) `v1.0.0`
 
 `regfm` is a command line tool for identifying individual regulatory regions mediating risk for a disease or the genes under their control. It uses summary statistics from genome-wide association studies and a list of lead SNPs as the input, and outputs candidate regulatory regions mediating risk and the genes under their control.
 
@@ -15,8 +14,8 @@ To demonstrate the code and ensure it runs on your machine, we provide data for 
 `regfm` depents on:
 
 `R (version >= 3.1.0), including several non-base packages`
-` [`bedtools`]((https://github.com/arq5x/bedtools2)) (version >= 2-2.19.1)`
-`[`plink`]((https://www.cog-genomics.org/plink2)) (version >= 1.9)`
+` [bedtools](https://github.com/arq5x/bedtools2) (version >= 2-2.19.1)`
+`[plink](https://www.cog-genomics.org/plink2) (version >= 1.9)`
 
 Please note that plink v1.07 is likely to run out of memory with the 1000 Genomes reference sets, so we strongly suggest you use v1.9. 
 
@@ -42,7 +41,7 @@ git clone github.com/cotsapaslab/regfm.git
 ```
 
 ### Pre-computed data
-We provide correlation matrices between all DNase I hypersensitivity clusters and expression levels for all genes, as described in our paper. These data are available via DropBox. Download and unzip [BigData](https://PathToBigData) into the `regfm` directory. 
+We provide correlation matrices between all DNase I hypersensitivity clusters and expression levels for all genes, as described in our paper. These data are available via DropBox. Download and unzip [DropboxData](https://PathToBigData) into the `regfm` directory. 
 
 ### LD reference data
 Finally, `regfm` requires an LD reference panel in plink formate (bed/bim/fam). In our paper we used the 1000 Genomes Europeans (excluding Finnish samples), but you should choose the most appropriate panel for the study you are analyzing. Due to the size of these data we cannot make them available directly. The plink webpage has a [helpful list of sources](https://www.cog-genomics.org/plink2/resources). In our distribution, we include data for chromosome 6 to allow the example to run. 
