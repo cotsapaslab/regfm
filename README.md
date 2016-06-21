@@ -15,7 +15,7 @@ To demonstrate the code and ensure it runs on your machine, we provide data for 
 
 `R (version >= 3.1.0), including several non-base packages`
 
-` [bedtools](https://github.com/arq5x/bedtools2) (version >= 2-2.19.1)`
+[bedtools](https://github.com/arq5x/bedtools2) (version >= 2-2.19.1)
 
 `[plink](https://www.cog-genomics.org/plink2) (version >= 1.9)`
 
