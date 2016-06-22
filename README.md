@@ -20,14 +20,14 @@ which takes a set of input and runs the analysis. Within this flow we
 calculate LD from the 1000 Genomes project, which is quite large.
 
 ## Contents
-1. Dependencies(#depend)
-2. Preparing your data(#data)
-3. Running `regfm`(#run)
-4. Description of output(#output)
-5. Details of package contents(#contents)
-6. Troubleshooting(#trouble)
-7. Citation(#cite)
-8. Contact information(#contact)
+1. [Dependencies](#depend)
+2. [Preparing your data](#data)
+3. [Running `regfm`](#run)
+4. [Description of output](#output)
+5. [Details of package contents](#contents)
+6. [Troubleshooting](#trouble)
+7. [Citation](#cite)
+8. [Contact information](#contact)
 
 ## Dependencies and installation <a name="depend"></a>
 
