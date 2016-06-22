@@ -180,26 +180,28 @@ Results for each trait can be found in the tab-delimited file `./Tables/<TRAIT>/
 
 ### Per-locus figures
 A figure for each locus can be found in `./Figures/<TRAIT>/`. These show the association signal in the 2Mbp region centered on the lead SNP (the top panel), the regulatory elements with significant \rho values and their correlation to genes in the region (middle panel), and how gene expression varies by regulatory element accessibility (bottom panel). These figures are described in more detail in our paper (see Citations section, below).
+
+
 <a name="contents"></a> 
 ## Detailed description of package contents 
 
 Under `BedData` folder
-`DHS-Data-Extn-Sorted.bed`: This file includes boundaries of each DHS cluster extended by 100 bp each side in the BED format.
-`Genecode-Sorted.bed`: This file includes boundaries of genes (from transcription start site to transcript end site) in the BED Format. Genes boundaries are obtained from Genecode v12.
+* `DHS-Data-Extn-Sorted.bed`: This file includes boundaries of each DHS cluster extended by 100 bp each side in the BED format.
+* `Genecode-Sorted.bed`: This file includes boundaries of genes (from transcription start site to transcript end site) in the BED Format. Genes boundaries are obtained from Genecode v12.
 
 Under `Data` folder
-`Allele-Specific-Data/Allele-Specific-UW-MAF.bed`: This file contains information about SNPs tested for allelic-imbalanced in DNA accessibility. This data is originally obtained from [`Maurano, et.al. Large-scale identification of sequence variants influencing human transcription factor occupancy in vivo`]((http://www.nature.com/ng/journal/v47/n12/extref/ng.3432-S5.txt) ). We then obtained MAF of the SNPs using 1000 Genome data, and added MAF column to the original file.
+* `Allele-Specific-Data/Allele-Specific-UW-MAF.bed`: This file contains information about SNPs tested for allelic-imbalanced in DNA accessibility. This data is originally obtained from [`Maurano, et.al. Large-scale identification of sequence variants influencing human transcription factor occupancy in vivo`]((http://www.nature.com/ng/journal/v47/n12/extref/ng.3432-S5.txt) ). We then obtained MAF of the SNPs using 1000 Genome data, and added MAF column to the original file.
 
 Under `Rdata` folder
-`Best-genomeFunc.Rdata`: Genomic function of each DHS cluster obtained by using ChromHMM data.
-`DHS-Data-Extn.Rdata`: Presense/absence of DHS clusters over 22 cell types after excluding DHS clusters overlapping MHC region (chr6:28x10^6 - 34x10^6 on hg19).
-`DHS-Data-Sorted.bed`: Boundaries of each DHS cluster in the BED format.
-`DHS-Data.Rdata`: Presense/absence of DHS clusters over 22 cell types.
-`Norm-Trans-Exp.Rdata`: A matrix of gene expression data obtained by processing Roadmap Epigenome Project exon array data.
-`Unique-DHS-Data.Rdata`: All 796,747 DHS cluster can be categorized to 71,912 unique clusters based on their patterns of presence/absence over 22 cell types. This file contains these unique clusters.
+* `Best-genomeFunc.Rdata`: Genomic function of each DHS cluster obtained by using ChromHMM data.
+* `DHS-Data-Extn.Rdata`: Presense/absence of DHS clusters over 22 cell types after excluding DHS clusters overlapping MHC region (chr6:28x10^6 - 34x10^6 on hg19).
+* `DHS-Data-Sorted.bed`: Boundaries of each DHS cluster in the BED format.
+* `DHS-Data.Rdata`: Presense/absence of DHS clusters over 22 cell types.
+* `Norm-Trans-Exp.Rdata`: A matrix of gene expression data obtained by processing Roadmap Epigenome Project exon array data.
+* `Unique-DHS-Data.Rdata`: All 796,747 DHS cluster can be categorized to 71,912 unique clusters based on their patterns of presence/absence over 22 cell types. This file contains these unique clusters.
 
 Under `BigData` folder
-`Crr-Pval-Mat-PerChr/Crr-pval-mat-chrN.Rdata`: Correlation P values between DHS clusters and genes overlapping chromosome N. Here P values for chromosome 6 is provided as an example. For access to the correlation P values of all chromosomes, look at `BigData` folder.
+* `Crr-Pval-Mat-PerChr/Crr-pval-mat-chrN.Rdata`: Correlation P values between DHS clusters and genes overlapping chromosome N. Here P values for chromosome 6 is provided as an example. For access to the correlation P values of all chromosomes, look at `BigData` folder.
 <a name="trouble"></a>
 ## Troubleshooting 
 If you get a `permission denied` error when running a script, enter
@@ -213,6 +215,7 @@ permission to execute the file.
 You can cite `regfm` as:
 
 Shooshtari, et al. Integrative genetic and epigenetic analysis uncovers regulatory mechanisms of autoimmune disease. [BioRxiv, 2016.](http://biorxiv.org/content/early/2016/05/19/054361)
+
 <a name="contact"></a>
-## Contact # Citation 
+## Contact
 Please address comments and questions to Parisa Shooshtari (pshoosh@broadinstitute.org) or Chris Cotsapas (cotsapas@broadinstitute.org)
