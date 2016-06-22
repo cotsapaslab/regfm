@@ -1,17 +1,34 @@
 #regfm (Regulatory Fine Mapping) `v1.0.0`
 
-`regfm` is a command line tool for identifying individual regulatory regions mediating risk for a disease or the genes under their control. It uses summary statistics from genome-wide association studies and a list of lead SNPs as the input, and outputs candidate regulatory regions mediating risk and the genes under their control.
+`regfm` is a command line tool for identifying individual regulatory
+regions mediating disease risk and the genes controlled by these
+regulators. It uses summary statistics from genome-wide 
+association studies and a list of lead SNPs as the input, and outputs
+posterior probabilities for each association being mediated by a
+regulatory effect, for each regulator being the causal risk factor,
+and for each gene in the locus being pathogenic.
 
-To demonstrate the code and ensure it runs on your machine, we provide data for the BACH2 locus on chromosome 6 from the IMSGC study of multiple sclerosis risk (IMSGC, Nature Genetics 2013), available on  [`immunobase.org`]((https://www.immunobase.org)). This is the locus included in Figure 3 of our upcoming paper (Shooshtari et al, submitted).
+To demonstrate the code and ensure it runs on your machine, we provide
+data for the BACH2 locus on chromosome 6 from the IMSGC study of
+multiple sclerosis risk (IMSGC, Nature Genetics 2013), available on
+[`immunobase.org`](https://www.immunobase.org). This is the locus
+included in Figure 3 of our
+[upcoming paper](http://biorxiv.org/content/early/2016/05/19/054361).
 
-`regfm` is a series of R scripts controlled by a shell script wrapper, which takes a set of input and runs the analysis. Within this flow we calculate LD from the 1000 Genomes project, which is quite large. We therefore split the operations up by chromosome, so you will have to provide some of the input in per-chromosome files.
+`regfm` is a series of R scripts controlled by a shell script wrapper,
+which takes a set of input and runs the analysis. Within this flow we
+calculate LD from the 1000 Genomes project, which is quite large.
 
 ## Dependencies and installation
 
-`regfm` depends on previous software and requires some additional, pre-computed files that are too large to distribute via this repository. For linkage disequilibrium calculations, it relies on an external reference panel, which you will have to access from the appropriate project page.
+`regfm` depends on previous software and requires some additional,
+pre-computed files that are too large to distribute via this
+repository. For linkage disequilibrium calculations, it relies on an
+external reference panel, which you will have to access from the
+appropriate project page. 
 
 ### Other software
-`regfm` depents on:
+`regfm` depends on:
 
 R (version >= 3.1.0), including several non-base packages
 
@@ -19,7 +36,7 @@ R (version >= 3.1.0), including several non-base packages
 
 [plink](https://www.cog-genomics.org/plink2) (version >= 1.9)
 
-Please note that plink v1.07 is likely to run out of memory with the 1000 Genomes reference sets, so we strongly suggest you use v1.9. 
+Please note that plink v1.07 is likely to run out of memory with the 1000 Genomes reference sets, so we strongly recommend you use v1.9. 
 
 To check which R packages are available on your system, copy the following code into an R console
 
@@ -39,14 +56,47 @@ install.packages(check.libs.fn(ret=T))
 
 You can download `regfm` from github via your browser or with the command
 ```  
-git clone github.com/cotsapaslab/regfm.git
+git clone https://github.com/cotsapaslab/regfm.git
 ```
 
 ### Pre-computed data
-We provide correlation matrices between all DNase I hypersensitivity clusters and expression levels for all genes, as described in our paper. These data are available via DropBox. Download [DropboxData](https://www.dropbox.com/sh/6alizvtn2fwrngf/AAA_-sn_bJm850Yv-6ZELkIpa?dl=0) into the `regfm` directory. 
+We provide correlation matrices between all DNase I hypersensitivity
+clusters and expression levels for all genes, as described in our
+paper. These data are available via DropBox, as GitHub does not host
+large files. In the main directory you will find the script
+`Download-Data.sh`, which will download these data for you into a
+specified directory. You must specify if the script should use the
+`wget` or the `curl` utility to do so, depending on what is installed
+on your system.
+
+```
+## Is curl installed?
+curl --help
+
+## is wget installed?
+wget --help
+
+## if you get a help message for at least one of these, you are good
+## to go
+
+./Download-Data.sh . curl
+## or
+./Download-Data.sh . wget
+```
+
+You can also obtain the data via the DropBox website, though you will
+have to sync your account to that directory.
 
 ### LD reference data
-Finally, `regfm` requires an LD reference panel in plink formate (bed/bim/fam). In our paper we used the 1000 Genomes Europeans (excluding Finnish samples), but you should choose the most appropriate panel for the study you are analyzing. Due to the size of these data we cannot make them available directly. The plink webpage has a [helpful list of sources](https://www.cog-genomics.org/plink2/resources). In our distribution, we include data for chromosome 6 to allow the example to run. 
+Finally, `regfm` requires an LD reference panel in plink formate
+(bed/bim/fam). In our paper we used the 1000 Genomes Europeans
+(excluding Finnish samples), but you should choose the most
+appropriate panel for the study you are analyzing. Due to the size of
+these data we cannot make them available directly. The plink
+documentation has a
+[helpful list of sources](https://www.cog-genomics.org/plink2/resources). In
+our distribution, we include data for chromosome 6 to allow the
+example to run.
 
 
 ## Preparing Your Data
@@ -139,13 +189,17 @@ Under `Rdata` folder
 Under `BigData` folder
 `Crr-Pval-Mat-PerChr/Crr-pval-mat-chrN.Rdata`: Correlation P values between DHS clusters and genes overlapping chromosome N. Here P values for chromosome 6 is provided as an example. For access to the correlation P values of all chromosomes, look at `BigData` folder.
 
+## Troubleshooting
+If you get a `permission denied` error when running a script, enter
+`chmod u+x <file>` for that file and try again. That should give you
+permission to execute the file.
 
 ## Citation
 `regfm` was written by Parisa Shooshtari (Yale University and the Broad Institute of MIT and Harvard). 
 
 You can cite `regfm` as:
 
-[Shooshtari, et al. Integrative genetic and epigenetic analysis uncovers regulatory mechanisms of autoimmune disease. BioRxiv, 2016.](http://biorxiv.org/content/early/2016/05/19/054361)
+Shooshtari, et al. Integrative genetic and epigenetic analysis uncovers regulatory mechanisms of autoimmune disease. [BioRxiv, 2016.](http://biorxiv.org/content/early/2016/05/19/054361)
 
 ## Contact 
 Please address comments and questions to Parisa Shooshtari (pshoosh@broadinstitute.org) or Chris Cotsapas (cotsapas@broadinstitute.org)
