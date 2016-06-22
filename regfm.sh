@@ -48,6 +48,7 @@ mkdir $maindir/ld_results/$TraitType
 
 mkdir $maindir/Data/perRegion-1000Genome
 mkdir $maindir/Data/perRegion-DHS-Gene-Corr
+mkdir $maindir/Data/perChr-$TraitType
 
 mkdir $maindir/credible_analysis
 mkdir $maindir/credible_analysis/$TraitType
