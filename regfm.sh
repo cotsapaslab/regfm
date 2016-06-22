@@ -4,18 +4,19 @@
 ################ 		    Input Variables - Edit This Section Before Running		        ################
 ########################################################################################################################
 
+## Edit this to point to the directory in which the present file lives - remember to remove the < > characters too!
 maindir=<WORKINGDIR>
 
-## LD reference panel
+## LD reference panel - edit this if you are using a different reference panel or if you have moved the Dropbox-downloadable files 
 KGEurDir=$maindir/BigData/1000Genome/European
 
 ## uncomment and edit these variables if plink and bedtools are not in your default path
 ## Otherwise keep them commented
 
-## plink path
+## plink path - edit <PLINKDIR> to point to the directory containing your plink installation  
 #export PATH=$PATH:<PLINKDIR>
 
-## bedtools path
+## bedtools path - edit <BEDTOOLSDIR> to point to the directory containing your bedtools installation  
 #export PATH=$PATH:<BEDTOOLSDIR>
 
 ########################################################################################################################
