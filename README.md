@@ -43,7 +43,7 @@ git clone github.com/cotsapaslab/regfm.git
 ```
 
 ### Pre-computed data
-We provide correlation matrices between all DNase I hypersensitivity clusters and expression levels for all genes, as described in our paper. These data are available via DropBox. Download and unzip [DropboxData](https://PathToBigData) into the `regfm` directory. 
+We provide correlation matrices between all DNase I hypersensitivity clusters and expression levels for all genes, as described in our paper. These data are available via DropBox. Download [DropboxData](https://www.dropbox.com/sh/6alizvtn2fwrngf/AAA_-sn_bJm850Yv-6ZELkIpa?dl=0) into the `regfm` directory. 
 
 ### LD reference data
 Finally, `regfm` requires an LD reference panel in plink formate (bed/bim/fam). In our paper we used the 1000 Genomes Europeans (excluding Finnish samples), but you should choose the most appropriate panel for the study you are analyzing. Due to the size of these data we cannot make them available directly. The plink webpage has a [helpful list of sources](https://www.cog-genomics.org/plink2/resources). In our distribution, we include data for chromosome 6 to allow the example to run. 
