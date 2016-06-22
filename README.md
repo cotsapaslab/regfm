@@ -29,7 +29,8 @@ calculate LD from the 1000 Genomes project, which is quite large.
 7. [Citation](#cite)
 8. [Contact information](#contact)
 
-## Dependencies and installation <a name="depend"></a>
+<a name="depend"></a>
+## Dependencies and installation 
 
 `regfm` depends on previous software and requires some additional,
 pre-computed files that are too large to distribute via this
@@ -108,8 +109,8 @@ documentation has a
 our distribution, we include data for chromosome 6 to allow the
 example to run.
 
-
-## Preparing Your Data <a name="data"></a>
+<a name="data"></a>
+## Preparing Your Data 
 
 For each trait you wish to analyze, you will need two input files:
 
@@ -123,7 +124,8 @@ You will also have to tell `regfm` which associations to fine-map, by providing 
 ### Example files 
 As an example, we have included input files for MS association in the BACH2 locus in `regfm/BedData/example`.
 
-## Running regfm <a name="run"></a>
+<a name="run"></a>
+## Running regfm 
 
 `regfm` assumes you will run the wrapper from the top-level directory where it lives. You will need to edit the first section of `regfm.sh`:
 
@@ -162,8 +164,8 @@ The example data can be run as:
 ```
 ./regfm.sh example
 ```
-
-## Output Results <a name="output"></a>
+<a name="output"></a>
+## Output Results 
 
 ### Per-locus summaries
 Results for each trait can be found in the tab-delimited file `./Tables/<TRAIT>/Summary-Table-<TRAIT>.txt`, which contains an entry for each lead SNP association a tab-delimited file with columns:
@@ -178,8 +180,8 @@ Results for each trait can be found in the tab-delimited file `./Tables/<TRAIT>/
 
 ### Per-locus figures
 A figure for each locus can be found in `./Figures/<TRAIT>/`. These show the association signal in the 2Mbp region centered on the lead SNP (the top panel), the regulatory elements with significant \rho values and their correlation to genes in the region (middle panel), and how gene expression varies by regulatory element accessibility (bottom panel). These figures are described in more detail in our paper (see Citations section, below).
-
-## Detailed description of package contents <a name="contents"></a> 
+<a name="contents"></a> 
+## Detailed description of package contents 
 
 Under `BedData` folder
 `DHS-Data-Extn-Sorted.bed`: This file includes boundaries of each DHS cluster extended by 100 bp each side in the BED format.
@@ -198,19 +200,19 @@ Under `Rdata` folder
 
 Under `BigData` folder
 `Crr-Pval-Mat-PerChr/Crr-pval-mat-chrN.Rdata`: Correlation P values between DHS clusters and genes overlapping chromosome N. Here P values for chromosome 6 is provided as an example. For access to the correlation P values of all chromosomes, look at `BigData` folder.
-
-## Troubleshooting <a name="trouble"></a>
+<a name="trouble"></a>
+## Troubleshooting 
 If you get a `permission denied` error when running a script, enter
 `chmod u+x <file>` for that file and try again. That should give you
 permission to execute the file.
-
-## Citation <a name="cite"></a> 
+<a name="cite"></a> 
+## Citation 
 
 `regfm` was written by Parisa Shooshtari (Yale University and the Broad Institute of MIT and Harvard). 
 
 You can cite `regfm` as:
 
 Shooshtari, et al. Integrative genetic and epigenetic analysis uncovers regulatory mechanisms of autoimmune disease. [BioRxiv, 2016.](http://biorxiv.org/content/early/2016/05/19/054361)
-
-## Contact # Citation <a name="contact"></a>
+<a name="contact"></a>
+## Contact # Citation 
 Please address comments and questions to Parisa Shooshtari (pshoosh@broadinstitute.org) or Chris Cotsapas (cotsapas@broadinstitute.org)
