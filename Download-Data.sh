@@ -1,22 +1,46 @@
 #!/bin/bash
 
-########################################################################################################################
-################ 		    Input Variables - Edit This Section Before Running		        ################
-########################################################################################################################
-
 maindir=$1
+software=$2
 
-
-########################################################################################################################
-################ 				DO NOT EDIT BELOW THIS POINT 				################
-########################################################################################################################
+mkdir $maindir/Rdata
+mkdir $maindir/Data
 mkdir $maindir/BedData
-mkdir $maindir/BedData/example
+mkdir $maindir/BigData
 
+cd $maindir
 
+if [ $software == 'wget' ]
+then
+   echo wget is running
+   wget --max-redirect=20 -O $maindir/Rdata/Download.zip https://www.dropbox.com/sh/eun66ffs2uczbu2/AABDm0mY48dp6spAMWZYxgLya?dl=1
+   wget --max-redirect=20 -O $maindir/Data/Download.zip https://www.dropbox.com/sh/x1c0yndjrz261w7/AABaBYjDv_HowIv2zh0LoAaya?dl=1
+   wget --max-redirect=20 -O $maindir/BedData/Download.zip https://www.dropbox.com/sh/lvnbn98m0b58ro0/AAC3_a3AkwF6a85O0spTbfvqa?dl=1
+   #wget --max-redirect=20 -O $maindir/BigData/Download.zip https://www.dropbox.com/sh/h9v0s004y1nkupm/AAD7HUb6WY3TIJMvtKRuAnaja?dl=1
+else
+   echo curl is running
+   curl -L https://www.dropbox.com/sh/eun66ffs2uczbu2/AABDm0mY48dp6spAMWZYxgLya?dl=1 > $maindir/Rdata/Download.zip  
+   curl -L https://www.dropbox.com/sh/x1c0yndjrz261w7/AABaBYjDv_HowIv2zh0LoAaya?dl=1 > $maindir/Data/Download.zip
+   curl -L https://www.dropbox.com/sh/lvnbn98m0b58ro0/AAC3_a3AkwF6a85O0spTbfvqa?dl=1 > $maindir/BedData/Download.zip
+   # curl -L https://www.dropbox.com/sh/ekrfk1z7bwq7201/AAA6wLBM0tA6AVeAX5deKtija?dl=1 > $maindir/BigData/1000Genome/Download.zip
+fi
 
-wget -O $maindir/BedData/DHS-Data-Extn-Sorted.bed "https://www.dropbox.com/s/yueyoifiy98oeqr/DHS-Data-Extn-Sorted.bed?dl=0"
-wget -O $maindir/BedData/example/allSNPs.bed  "https://www.dropbox.com/s/nxr61rcimdfd60o/allSNPs.bed?dl=0"
-wget -O $maindir/BedData/example/LeadSNPs.txt  "https://www.dropbox.com/s/hqvyxstenow0mfx/LeadSNPs.txt?dl=0"
-wget -O $maindir/BedData/example/Genecode-Sorted.bed  "https://www.dropbox.com/s/uj7hfjrvaw70ukj/Genecode-Sorted.bed?dl=0"
+cd ./Rdata
+unzip Download.zip
+rm Download.zip
+cd ..
 
+cd ./Data
+unzip Download.zip
+rm Download.zip
+cd ..
+
+cd ./BedData
+unzip Download.zip
+rm Download.zip
+cd ..
+
+#cd ./BigData
+#unzip Download.zip
+#rm Download.zip
+#cd ..
