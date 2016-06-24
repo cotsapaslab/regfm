@@ -202,11 +202,13 @@ Under `Rdata` folder
 
 Under `BigData` folder
 * `Crr-Pval-Mat-PerChr/Crr-pval-mat-chrN.Rdata`: Correlation P values between DHS clusters and genes overlapping chromosome N. Here P values for chromosome 6 is provided as an example. For access to the correlation P values of all chromosomes, look at `BigData` folder.
+
 <a name="trouble"></a>
 ## Troubleshooting 
 If you get a `permission denied` error when running a script, enter
 `chmod u+x <file>` for that file and try again. That should give you
 permission to execute the file.
+
 <a name="cite"></a> 
 ## Citation 
 
