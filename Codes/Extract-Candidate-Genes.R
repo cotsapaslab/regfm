@@ -64,7 +64,7 @@ colseset.gene <- colseset.gene.fullname <- c()
 dist.clst <- leadSNP.bp.hg19 <- leadSNP <- chr <- c()
 for (region in srt.regions) {
   # Extract position of lead SNPs
-  # print(region)
+  print(region)
   leadSNP[region] <- paste0("rs", unlist(strsplit(region, "rs"))[2])
   lead.pos <- snps.data[which(snps.data[,"SNP"] == leadSNP[region]), "Position"]
   chr[region] <- unlist(strsplit(region, "rs"))[1]
@@ -90,6 +90,8 @@ for (region in srt.regions) {
 # Make a final annotation table and save it as excel file.
 if (nrow(comp.mat) != 1) {
   Final.Table <- cbind(comp.mat[, c("Region", "Total.PPA")], colseset.gene[comp.mat[, "Region"]], comp.mat[, "TopGenes.Ratio"], colseset.gene.fullname[comp.mat[, "Region"]], DIGs[comp.mat[, "Region"]], leadSNP.bp.hg19[comp.mat[, "Region"]], dist.clst[comp.mat[, "Region"]], leadSNP[comp.mat[, "Region"]], chr[comp.mat[, "Region"]])  
+  colnames(Final.Table) <- c("Region", "Total PPA", "Closest Gene", "TopGenes (PP/Total PPA)", "CLGs.fullname", "DIGs.fullname", "leadSNP.Pos", "Distance", "leadSNP", "Chr")
+  
   Summary.Table <- Final.Table[,c("Chr", "leadSNP", "leadSNP.Pos", "Total PPA", "Closest Gene", "Distance", "TopGenes (PP/Total PPA)")] 
 } else {
   Final.Table <- c(comp.mat[, c("Region", "Total.PPA")], colseset.gene[comp.mat[, "Region"]], comp.mat[, "TopGenes.Ratio"], colseset.gene.fullname[comp.mat[, "Region"]], DIGs[comp.mat[, "Region"]], leadSNP.bp.hg19[comp.mat[, "Region"]], dist.clst[comp.mat[, "Region"]], leadSNP[comp.mat[, "Region"]], chr[comp.mat[, "Region"]])

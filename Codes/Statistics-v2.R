@@ -46,23 +46,8 @@ colnames(allSNP.dhs.ovrlp) <- c("Chr", "V2", "Pos", "SNP", "P", "DHS.Chr", "DHS.
 indx <- which(duplicated(allSNP.dhs.ovrlp[,"DHS.ID"])==F)
 My.DHSs <- allSNP.dhs.ovrlp[indx, c("DHS.Chr", "DHS.Start", "DHS.End", "DHS.ID")]
 
-all.snps <- read.table(snps.path, stringsAsFactors=F, sep="\t")
-colnames(all.snps) <- c("Chr", "V2", "Pos", "SNP", "P")
-
-# Read genecode annotation data
-# genecode.table <- read.table(genecode.comp.path, sep="\t", stringsAsFactors=FALSE)
-# dim(genecode.table) # 167536     15
-# colnames(genecode.table) <- c("transcript_id", "chrom", "strand", "txStart",
-#                               "txEnd", "cdsStart", "cdsEnd", "exonCount",
-#                               "exonStarts", "exonEnds", "id", "gene_id",
-#                               "cdsStartStat", "cdsEndStat", "exonFrames")
-# 
-# ensTrans <- unlist(lapply(as.list(genecode.table[, "transcript_id"]), function(x) {
-#   return(unlist(strsplit(x, "\\."))[1])} ))
-# ensTrans.hugoGene <- paste(ensTrans, genecode.table[, "gene_id"], sep="-")
-# # genecode.data <- cbind(genecode.table[,c("chrom", "txStart", "txEnd")], ensTrans.hugoGene)
-# genecode.data <- genecode.table[,c("chrom", "txStart", "txEnd", "gene_id")]
-# colnames(genecode.data) <- c("Chr", "Start", "End", "Gene.ID")
+#all.snps <- read.table(snps.path, stringsAsFactors=F, sep="\t")
+#colnames(all.snps) <- c("Chr", "V2", "Pos", "SNP", "P")
 
 genecode.table <- read.table(genecode.bed.path, sep="\t", stringsAsFactors=F, header=F)
 colnames(genecode.table) <- c("Chr", "Start", "End", "gene_id", "V5")
@@ -75,9 +60,9 @@ for (region in all.regions) {
   
   ###############################################################################
   # Number of SNPs
-  start <- region.info[region, "Start"]
-  end <- region.info[region, "End"]  
-  num.snps[region] <- length(which(all.snps[,"Pos"] >= start & all.snps[,"Pos"] <= end))
+  #start <- region.info[region, "Start"]
+  #end <- region.info[region, "End"]  
+  #num.snps[region] <- length(which(all.snps[,"Pos"] >= start & all.snps[,"Pos"] <= end))
   
   ###############################################################################
   # Number of credible SNPs
@@ -120,7 +105,9 @@ for (region in all.regions) {
   
 }
 
-Output <- cbind(Num.SNPs=num.snps, CI.Size=num.CI.snps, Num.Cred.onDHS=num.cred.onDHS, Num.DHS=Num.DHS, Num.Burdened.DHSs=num.burdened.dhs, Num.DHS.withSNP=Num.DHS.withSNP, prop.withSNP.DHSs=prop.withSNP.DHSs, Num.Tested.Gene=Num.Gene, Num.Genecode.Genes=Num.genecode.genes, Genecode.Tested.Ratio=ratio.genecode.tested)
+Output <- cbind(CI.Size=num.CI.snps, Num.Cred.onDHS=num.cred.onDHS, Num.DHS=Num.DHS, Num.Burdened.DHSs=num.burdened.dhs, Num.DHS.withSNP=Num.DHS.withSNP, prop.withSNP.DHSs=prop.withSNP.DHSs, Num.Tested.Gene=Num.Gene, Num.Genecode.Genes=Num.genecode.genes, Genecode.Tested.Ratio=ratio.genecode.tested)
+
+# Output <- cbind(Num.SNPs=num.snps, CI.Size=num.CI.snps, Num.Cred.onDHS=num.cred.onDHS, Num.DHS=Num.DHS, Num.Burdened.DHSs=num.burdened.dhs, Num.DHS.withSNP=Num.DHS.withSNP, prop.withSNP.DHSs=prop.withSNP.DHSs, Num.Tested.Gene=Num.Gene, Num.Genecode.Genes=Num.genecode.genes, Genecode.Tested.Ratio=ratio.genecode.tested)
 
 Out.Table <- cbind(Final.Table, Output)
 
