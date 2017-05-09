@@ -168,9 +168,25 @@ The example data can be run as:
 ## Output Results 
 
 ### Per-locus summaries
-Results for each trait can be found in the tab-delimited file `./Tables/<TRAIT>/Summary-Table-<TRAIT>.txt`, which contains an entry for each lead SNP association a tab-delimited file with columns:
+Results for each trait can be found in the tab-delimited file `./Tables/<TRAIT>/Final-Results.txt`, which contains an entry for each lead SNP association a tab-delimited file with columns:
 
-* Disease - Trait* Chr - Chromosome number of the risk locus* Start - Genomic position of the start site of 2Mbp risk region  (hg19)* End - Genomic position of the end site of 2Mbp risk region  (hg19)* Lead.SNP - Most associated SNP in the locus* N.CI - Number of 99\% credible interval SNPs* N.DHS - Total number of DHS clusters overlapping the 2Mbp region* N.Gene - Total number of genes overlapping the 2Mbp region* N.Pr.DHS - Number of DHS clusters with at least one CI on them* Total.Rho - Posterior probability of association attributable to DHS clusters with at least one CI* Cell - Cell type in which \rho is significant (FDR < 0.1)* N.DHS.Cell - Number of DHS clusters in 2Mbp region active in the cell type* N.Pr.DHS.Cell - Number of prioritzed DHS clusters that are active in the cell type* Rho.perCell - Posterior probability of association attributable to DHS clusters active in the cell type* Rho.FDR - False discovery rate of the cell type \rho* Gene - Prioritized gene* Gamma.FDR - False discovery rate of the gene \gamma 
+* Disease - Trait
+* Chr - Chromosome number of the risk locus
+* Start - Genomic position of the start site of 2Mbp risk region  (hg19)
+* End - Genomic position of the end site of 2Mbp risk region  (hg19)
+* Lead.SNP - Most associated SNP in the locus
+* N.CI - Number of 99\% credible interval SNPs
+* N.DHS - Total number of DHS clusters overlapping the 2Mbp region
+* N.Gene - Total number of genes overlapping the 2Mbp region
+* N.Pr.DHS - Number of DHS clusters with at least one CI on them
+* Total.Rho - Posterior probability of association attributable to DHS clusters with at least one CI
+* Cell - Cell type in which \rho is significant (FDR < 0.1)
+* N.DHS.Cell - Number of DHS clusters in 2Mbp region active in the cell type
+* N.Pr.DHS.Cell - Number of prioritzed DHS clusters that are active in the cell type
+* Rho.perCell - Posterior probability of association attributable to DHS clusters active in the cell type
+* Rho.FDR - False discovery rate of the cell type \rho
+* Gene - Prioritized gene
+* Gamma.FDR - False discovery rate of the gene \gamma 
 
 ### Per-locus figures
 A figure for each locus can be found in `./Figures/<TRAIT>/`. These show the association signal in the 2Mbp region centered on the lead SNP (the top panel), the regulatory elements with significant \rho values and their correlation to genes in the region (middle panel), and how gene expression varies by regulatory element accessibility (bottom panel). These figures are described in more detail in our paper (see Citations section, below).
