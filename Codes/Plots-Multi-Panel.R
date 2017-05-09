@@ -28,19 +28,22 @@ source(paste0(Work.Dir, "/Codes/Plots-Panel1-geneLabels.R"))
 source(paste0(Work.Dir, "/Codes/Plots-Panel1.R"))
 source(paste0(Work.Dir, "/Codes/Plots-Panel2.R"))
 
+Out.Dir <- paste0(Work.Dir, "/Data/perRegion-DHS-Gene-Corr/", trait.type)
 path.to.data <- paste0(Work.Dir, "/BedData/", trait.type, "/allSNPs-Sorted.bed")
 ai.cred.path <- paste0(Work.Dir, "/Data/Allele-Specific-Data/credSNP-AlleleSpecific-Overlap-", trait.type, ".bed")
 out.dir <- paste0(Work.Dir, "/Figures/", trait.type)
 path.to.region.info <- paste0(Work.Dir, "/BedData/", trait.type, "/Region-Info.bed")
 dir.create(out.dir, showWarnings=F, recursive=T)
 
-load(paste0(Work.Dir, "/Rdata/", trait.type, "/PPA.Rdata"))
+load(paste0(Work.Dir, "/Rdata/", trait.type, "/PPD.Rdata"))
 load(paste0(Work.Dir, "/Rdata/", trait.type, "/PPC.Rdata"))
 load(paste0(Work.Dir, "/Rdata/", trait.type, "/PP-Mat.Rdata"))
-load(paste0(Work.Dir, "/Rdata/", trait.type, "/RTC-Pvalue.Rdata"))
+# load(paste0(Work.Dir, "/Rdata/", trait.type, "/RTC-Pvalue.Rdata"))
 load(paste0(Work.Dir, "/Rdata/Best-genomeFunc.Rdata"))
 load(paste0(Work.Dir, "/Rdata/Norm-Trans-Exp.Rdata"))
 load(paste0(Work.Dir, "/Rdata/DHS-Data.Rdata"))
+
+PPA <- PPD
 
 rownames(norm.trans.exp) <- paste(norm.trans.exp[,"chrom"], norm.trans.exp[, "ensTrans.hugoGene"], sep="-")
 all.regions <- names(PPA)
@@ -69,6 +72,7 @@ if (ai.status == "YES") {
 ###############################################################################
 for (region in all.regions) {
   # print(region)
+  load(paste0(Work.Dir, "/Data/perRegion-DHS-Gene-Corr/", trait.type, "/Crr-pval-mat-", region, ".Rdata"))
   
   indx <- which(region.info[,"Region"] == region)
   region.start <- region.info[indx, "regionStart"]
@@ -80,7 +84,7 @@ for (region in all.regions) {
   
   ppa <- PPA[[region]]
   ppc <- PPC[[region]]
-  pp.mat <- PP.mat[[region]]  
+  pp.mat <- PP.mat[[region]]
   num.dhs <- length(ppa)
   
   input.path <- paste0(Work.Dir, "/credible_analysis/", trait.type, "/credible_output/credible_output_", region, ".txt")  
@@ -94,7 +98,7 @@ for (region in all.regions) {
     plot.panel1(norm.trans.exp[region.genes, 1:11], region, input.path, path.to.data, region.start, region.end, trait.type)
     plot.panel1.geneLabels(X, region.start, region.end, out.path)
     plot.panel2(region, ppa, ppc, pp.mat, status)
-    rtc.pval <- RTC.Pvalue[[region]]
+    rtc.pval <- region.crr.pval.mat # RTC.Pvalue[[region]]
     source(paste0(Work.Dir, "/Codes/Plots-Panel3.R"))
   dev.off()
 }

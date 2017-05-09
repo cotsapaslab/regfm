@@ -90,19 +90,19 @@ for(i in 1:length(gene.names)) {
   }
 }
 
-par(mar=c(2,5,0,0)+0.1)
-stars <- rep("", times=length(pval.lbl))
-stars[which(pval.lbl <= 0.05)] <- "*"
-mycol <- rep("black", times=length(pval.lbl))
-mycol[which(pval.lbl <= 0.05)] <- "red"
-pval.lbl[pval.lbl == 0] <- "< 0.005"
-pval.lbl <- paste0(pval.lbl, stars)
-
-plot(1, type="n", axes=F,
-     xlim=c(0.5, max(x.space)+0.4/length(dhs.names)),
-     ylim= c(-1,1),
-     xlab="", ylab="")
-axis(side=1, at = x.space, labels=FALSE, tick=F,las=2)
-axis(side=2, at=y.lbl, labels = FALSE, tick=F)
-mtext(side=2, text="P Value", line=2, col="darkgrey")
-text(x = x.space, y=0, labels = pval.lbl, srt = 45, pos = 1, xpd = TRUE, cex=1, col=mycol)
+# par(mar=c(2,5,0,0)+0.1)
+# stars <- rep("", times=length(pval.lbl))
+# stars[which(pval.lbl <= 0.05)] <- "*"
+# mycol <- rep("black", times=length(pval.lbl))
+# mycol[which(pval.lbl <= 0.05)] <- "red"
+# pval.lbl[pval.lbl == 0] <- "< 0.005"
+# pval.lbl <- paste0(pval.lbl, stars)
+# 
+# plot(1, type="n", axes=F,
+#      xlim=c(0.5, max(x.space)+0.4/length(dhs.names)),
+#      ylim= c(-1,1),
+#      xlab="", ylab="")
+# axis(side=1, at = x.space, labels=FALSE, tick=F,las=2)
+# axis(side=2, at=y.lbl, labels = FALSE, tick=F)
+# mtext(side=2, text="P Value", line=2, col="darkgrey")
+# text(x = x.space, y=0, labels = pval.lbl, srt = 45, pos = 1, xpd = TRUE, cex=1, col=mycol)
