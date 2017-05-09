@@ -3,7 +3,6 @@
 ########################################################################################################################
 ################ 		    Input Variables - Edit This Section Before Running		        ################
 ########################################################################################################################
-
 ## Edit this to point to the directory in which the present file lives - remember to remove the < > characters too!
 maindir=<WORKINGDIR>
 
@@ -14,10 +13,14 @@ KGEurDir=$maindir/BigData/1000Genome/European
 ## Otherwise keep them commented
 
 ## plink path - edit <PLINKDIR> to point to the directory containing your plink installation  
-#export PATH=$PATH:<PLINKDIR>
+export PATH=$PATH:<PLINKDIR>
 
 ## bedtools path - edit <BEDTOOLSDIR> to point to the directory containing your bedtools installation  
-#export PATH=$PATH:<BEDTOOLSDIR>
+export PATH=$PATH:<BEDTOOLSDIR>
+
+GammaPerm=1000 # 50000
+iter1=50 # 100
+iter2=50 # 50
 
 ########################################################################################################################
 ################ 				DO NOT EDIT BELOW THIS POINT 				################
@@ -27,7 +30,6 @@ exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>log.out 2>&1
 ## Everything below will be directed to the file 'log.out'
-
 
 trait=$1
 TraitType=$trait
@@ -39,6 +41,8 @@ rdatadir=$maindir/Rdata/$TraitType
 figdir=$maindir/Figures/$TraitType
 tabledir=$maindir/Tables/$TraitType
 beddir=$maindir/BedData/$TraitType
+prefix=credible_output_
+suffix=.txt
 
 cd $maindir
 
@@ -128,18 +132,40 @@ Rscript $codesdir/credSNPs-DHS-Extn-CrrGene-Annot.R $TraitType $maindir
 ## Generate a matrix of correlation P values between DHS clusters overlapping the locus and all genes in the genome.
 Rscript $codesdir/Prepare-Crr-Pval.R $TraitType $maindir $bigdatadir
 
-## Compute permutation-based P value between each candidate DHS and the genes overlapping 2Mbp region 
-## to completely remove inflation in the P values test statistics.
-Rscript $codesdir/Compute-RTC-Pvalue.R $TraitType $maindir $bigdatadir
+########################################################################################################################
+## Computing Rho P Values per Cell Type by Permutation
+chmod +x $codesdir/Rho-Significance-Part1.sh
+chmod +x $codesdir/Rho-Significance-Part2.sh
 
-## Compute posterior probability of association per CI SNPs, per DHS cluster, and per genes; and
-## Rank genes based on their posterior probability of associations.
-Rscript $codesdir/Rank-Genes-v2.R $TraitType $maindir
-Rscript $codesdir/Extract-Candidate-Genes.R $TraitType $maindir
+$codesdir/Rho-Significance-Part1.sh $maindir $TraitType
+
+for chunk in `seq 1 $iter1`; do
+	$codesdir/Rho-Significance-Part2.sh $maindir $TraitType $chunk $iter2
+done
+
+
+for myFile in `ls $maindir/credible_analysis/$TraitType/credible_output`; do
+	region=$(echo "$myFile" | sed -e "s/^$prefix//" -e "s/$suffix$//")
+	echo $region
+	Rscript $codesdir/Rho-gen-perCell-randRho.R $maindir $TraitType $region
+done
+
+Rscript $codesdir/Rho-Compute-Pvalue.R $maindir $TraitType
+
+########################################################################################################################
+## Computing gamma per gene, and P value of gamma for each pair of gene and cell type.
+for myFile in `ls $maindir/credible_analysis/$TraitType/credible_output`; do
+	region=$(echo "$myFile" | sed -e "s/^$prefix//" -e "s/$suffix$//")
+	echo $region
+	Rscript $codesdir/Rank-Genes-v2-Permutation.R $maindir $TraitType $region $GammaPerm
+done
+
+Rscript $codesdir/Identify-Significant-Genes-v2.R $maindir $TraitType
+
 
 ########################################################################################################################
 ## Report statistics for credible interval SNPs, DHS clusters and genes.
-Rscript $codesdir/Statistics-v2.R $TraitType $maindir
+Rscript $codesdir/Results-Table.R $maindir $TraitType
 
 ## Plot multi-panel graphs
 $codesdir/Allele-Specific-Preparation.sh $trait $maindir
@@ -147,4 +173,4 @@ Rscript $codesdir/Plots-Multi-Panel.R $TraitType $maindir
 
 ## Remove unnecessary tables
 cd $maindir/Tables/$TraitType
-ls | grep -v Summary-Table-$TraitType.txt | xargs rm
+ls | grep -v Final-Results.txt | xargs rm
